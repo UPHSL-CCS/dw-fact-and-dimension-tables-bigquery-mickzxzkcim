@@ -46,6 +46,27 @@ To replicate this analysis, follow these steps:
 
 ---
 
+### Short Reflection 
+
+1. **Why do we separate data into fact and dimension tables?** We separate data into fact and dimension tables to make databases faster, simpler, and more reliable.
+
+Fact tables store key measurements or events (like sales totals or birth counts).
+
+Dimension tables store the context for those events (like customer details, product descriptions, or locations).
+
+This "star schema" design significantly improves query speed because analytics often involve summing up millions of facts but only need a few descriptive details from the smaller dimension tables. It also reduces data redundancy; for example, a state name like "California" is stored once in a dimension table instead of being repeated for every single birth record in a giant table.
+   
+2. **What challenges might arise if we stored everything in one large table?**Storing everything in one large table (a "denormalized" table) creates several major problems:
+
+Slow Performance: Queries have to scan through massive amounts of repetitive data, making analysis and reporting incredibly slow. 
+
+Data Redundancy: Repeating descriptive information for every single entry wastes enormous amounts of storage space.
+
+Maintenance Nightmares: If you need to update a piece of information (like changing a category name), you have to find and change it in potentially millions of rows. This is inefficient and greatly increases the risk of errors and data inconsistencies.
+
+
+---
+
 ### 1. Create the Fact Table (`fact_names.sql`)
 
 This script creates the central fact table containing the core birth count measures.
@@ -61,3 +82,4 @@ SELECT
   DATE(CONCAT(CAST(FLOOR(year/10)*10 AS STRING), '-01-01')) AS decade_start
 FROM `bigquery-public-data.usa_names.usa_1910_2013`
 WHERE name IS NOT NULL AND number > 0;
+
