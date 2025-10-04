@@ -56,7 +56,7 @@ Dimension tables store the context for those events (like customer details, prod
 
 This "star schema" design significantly improves query speed because analytics often involve summing up millions of facts but only need a few descriptive details from the smaller dimension tables. It also reduces data redundancy; for example, a state name like "California" is stored once in a dimension table instead of being repeated for every single birth record in a giant table.
    
-2. **What challenges might arise if we stored everything in one large table?**Storing everything in one large table (a "denormalized" table) creates several major problems:
+2. **What challenges might arise if we stored everything in one large table?** Storing everything in one large table (a "denormalized" table) creates several major problems:
 
 Slow Performance: Queries have to scan through massive amounts of repetitive data, making analysis and reporting incredibly slow. 
 
